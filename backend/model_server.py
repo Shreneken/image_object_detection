@@ -2,54 +2,57 @@ from flask_ml.flask_ml_server import MLServer
 from flask_ml.flask_ml_server.constants import DataTypes
 from flask_ml.flask_ml_server.models import ResponseModel, CustomInput, ImageResult
 
-from ml.detection_model import Detection_Model, Model_Handler
+from ml.detection_model import Detection_Model
+from ml.model_utils import * 
 
 
 
-server = MLServer(__name__)
+class Model_Server:
 
-@server.route('/detect', input_type=DataTypes.CUSTOM)
-def detect(input: list[CustomInput], parameters: dict):
+    server = MLServer(__name__)    
     
-    print('Inputs:', input)
-    print('Parameters:', parameters)
+    """ 
+    Expected request json format in /detect endpoint:
+
+        inputs = [
+            {
+                "input": [
+                    {
+                        "type": "input",
+                        "value": "./input_images/cars.png",
+                    },
+                    {
+                        "type": "output",
+                        "value": "./output_images/client_sample_output.png",
+                    },
+                    {"type": "model", "value": "retina-net"},
+                ]
+            }
+        ] 
+
+    """
+    @server.route('/detect', input_type=DataTypes.CUSTOM)
+    def detect(input: list[CustomInput], parameters: dict):
+        
+        print('Inputs:', input)
+        print('Parameters:', parameters)
+        
+        input_path, output_path, model_type, model_path = Input_Handler.parse_input(input)
+        min_perc_prob = Parameter_Handler.parse_parameter(parameters, str="min_perc_prob")
+
+        model = Detection_Model(model_type=model_type, model_path=model_path)
+
+        results = model.predict(input_path, output_path, min_perc_prob)
+        results = [ImageResult(file_path=input_path, result=results)]
+        response = ResponseModel(results=results)
+        
+        return response.get_response()
     
-    input_path, output_path, model_type = None, None, None
-    input_values = input[0].input
-    
-    input_path = input_values["input"]
-    output_path = input_values["output"]
 
-    model_type = Model_Handler.get_type(input_values["model"])
-    model_path = Model_Handler.get_path(model_type)
-    min_perc_prob = parameters["min_perc_prob"]
+    @classmethod
+    def start_server(model_server):
+        model_server.server.run()
 
-    model = Detection_Model(model_type=model_type, model_path=model_path)
-    model.initialize()
-
-    results = model.predict(input_path, output_path, min_perc_prob)
-    results = [ImageResult(file_path=input_path, result=results)]
-    response = ResponseModel(results=results)
-    
-    return response.get_response()
-
-
-server.run()
-
-# Expected request json format:
-#
-# inputs = [
-#     {
-#         "input": [
-#             {
-#                 "type": "input",
-#                 "value": "./input_images/cars.png",
-#             },
-#             {
-#                 "type": "output",
-#                 "value": "./output_images/client_sample_output.png",
-#             },
-#             {"type": "model", "value": "retina-net"},
-#         ]
-#     }
-# ]
+if __name__ == "__main__":
+    model_server = Model_Server()
+    model_server.start_server()
