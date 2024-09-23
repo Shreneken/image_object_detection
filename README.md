@@ -16,7 +16,12 @@ Now, just run the following command to install all the dependencies
 pipenv install
 ```
 
-3. Downloading the models
+3. Activate the virtual environment
+```bash
+pipenv shell
+```
+
+4. Downloading the models
 
 We want to download the models and store them inside `ml/models/`. To achieve this, you can do the following:
 ```bash
