@@ -58,6 +58,8 @@ wget https://github.com/OlafenwaMoses/ImageAI/releases/download/3.0.0-pretrained
 # Download retina-net (size = 130 mb)
 wget https://github.com/OlafenwaMoses/ImageAI/releases/download/3.0.0-pretrained/retinanet_resnet50_fpn_coco-eeacb38b.pth
 
+# Go back to the project directory
+cd ../..
 ```
 
 ### Starting the server
