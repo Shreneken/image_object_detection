@@ -20,7 +20,6 @@ class Handler:
 
 
 class Model_Handler(Handler):
-
     @staticmethod
     def set_model_type(model, model_type):
         if model_type == Model_Type.yolov3:
@@ -41,7 +40,9 @@ class Model_Handler(Handler):
                 Model_Type.tiny_yolov3
                 if type_in_str == "tiny-yolov3"
                 else (
-                    Model_Type.retina_net if type_in_str == "retina-net" else Exception("No such model type!")
+                    Model_Type.retina_net
+                    if type_in_str == "retina-net"
+                    else Exception("No such model type!")
                 )
             )
         )
@@ -54,15 +55,18 @@ class Model_Handler(Handler):
             else (
                 Model_Path.tiny_yolov3
                 if model_type == Model_Type.tiny_yolov3
-                else Model_Path.yolov3 if model_type == Model_Type.yolov3 else Exception("No such model!")
+                else Model_Path.yolov3
+                if model_type == Model_Type.yolov3
+                else Exception("No such model!")
             )
         )
 
 
 class Input_Handler(Handler):
-
     @staticmethod
-    def parse_input(input: list[CustomInput]) -> tuple[str, str, Model_Type, Model_Path]:
+    def parse_input(
+        input: list[CustomInput],
+    ) -> tuple[str, str, Model_Type, Model_Path]:
 
         [input_items] = input
         input_values = input_items.input
@@ -75,7 +79,6 @@ class Input_Handler(Handler):
 
 
 class Parameter_Handler(Handler):
-
     @staticmethod
     def parse_parameter(parameters, str):
         return parameters[str]

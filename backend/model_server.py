@@ -1,7 +1,7 @@
 from flask_ml.flask_ml_server import MLServer
 from flask_ml.flask_ml_server.constants import DataTypes
-from flask_ml.flask_ml_server.models import CustomInput, ImageResult, ResponseModel
-
+from flask_ml.flask_ml_server.models import (CustomInput, ImageResult,
+                                             ResponseModel)
 from ml.detection_model import Detection_Model
 from ml.model_utils import *
 
@@ -37,8 +37,12 @@ class Model_Server:
         print("Inputs:", input)
         print("Parameters:", parameters)
 
-        input_path, output_path, model_type, model_path = Input_Handler.parse_input(input)
-        min_perc_prob = Parameter_Handler.parse_parameter(parameters, str="min_perc_prob")
+        input_path, output_path, model_type, model_path = Input_Handler.parse_input(
+            input
+        )
+        min_perc_prob = Parameter_Handler.parse_parameter(
+            parameters, str="min_perc_prob"
+        )
 
         model = Detection_Model(model_type=model_type, model_path=model_path)
 

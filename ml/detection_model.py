@@ -16,7 +16,9 @@ class Detection_Model:
 
     def initialize(self):
         Model_Handler.set_model_type(self.detector_model, self.model_type)
-        self.detector_model.setModelPath(os.path.join(self.exec_path, self.model_path.value))
+        self.detector_model.setModelPath(
+            os.path.join(self.exec_path, self.model_path.value)
+        )
         self.detector_model.loadModel()
 
     def predict(self, input_image_path, output_image_path, min_perc_prob):
@@ -30,7 +32,9 @@ class Detection_Model:
 if __name__ == "__main__":
     det = Detection_Model(Model_Type.retina_net, Model_Path.retina_net)
     det.initialize()
-    detections = det.predict("./input_images/cars.png", "./output_images/cars_retina.png", 30)
+    detections = det.predict(
+        "./input_images/cars.png", "./output_images/cars_retina.png", 30
+    )
 
     for eachObject in detections:
         print(
