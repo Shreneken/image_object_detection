@@ -1,7 +1,8 @@
 import os
+from pprint import pprint
 
 from imageai.Detection import ObjectDetection
-from pprint import pprint
+
 from ml.model_utils import *
 
 
@@ -15,17 +16,13 @@ class Detection_Model:
 
     def initialize(self):
         Model_Handler.set_model_type(self.detector_model, self.model_type)
-        self.detector_model.setModelPath(
-            os.path.join(self.exec_path, self.model_path.value)
-        )
+        self.detector_model.setModelPath(os.path.join(self.exec_path, self.model_path.value))
         self.detector_model.loadModel()
 
     def predict(self, input_image_path, output_image_path, min_perc_prob):
         return self.detector_model.detectObjectsFromImage(
             input_image=os.path.join(self.exec_path, input_image_path),
-            output_image_path=os.path.join(
-                self.exec_path, output_image_path
-            ),
+            output_image_path=os.path.join(self.exec_path, output_image_path),
             minimum_percentage_probability=min_perc_prob,
         )
 

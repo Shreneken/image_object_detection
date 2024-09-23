@@ -1,16 +1,15 @@
 from flask_ml.flask_ml_server import MLServer
 from flask_ml.flask_ml_server.constants import DataTypes
-from flask_ml.flask_ml_server.models import ResponseModel, CustomInput, ImageResult
+from flask_ml.flask_ml_server.models import CustomInput, ImageResult, ResponseModel
 
 from ml.detection_model import Detection_Model
-from ml.model_utils import * 
-
+from ml.model_utils import *
 
 
 class Model_Server:
 
-    server = MLServer(__name__)    
-    
+    server = MLServer(__name__)
+
     """ 
     Expected request json format in /detect endpoint:
 
@@ -31,12 +30,13 @@ class Model_Server:
         ] 
 
     """
-    @server.route('/detect', input_type=DataTypes.CUSTOM)
+
+    @server.route("/detect", input_type=DataTypes.CUSTOM)
     def detect(input: list[CustomInput], parameters: dict):
-        
-        print('Inputs:', input)
-        print('Parameters:', parameters)
-        
+
+        print("Inputs:", input)
+        print("Parameters:", parameters)
+
         input_path, output_path, model_type, model_path = Input_Handler.parse_input(input)
         min_perc_prob = Parameter_Handler.parse_parameter(parameters, str="min_perc_prob")
 
@@ -45,13 +45,13 @@ class Model_Server:
         results = model.predict(input_path, output_path, min_perc_prob)
         results = [ImageResult(file_path=input_path, result=results)]
         response = ResponseModel(results=results)
-        
+
         return response.get_response()
-    
 
     @classmethod
     def start_server(model_server):
         model_server.server.run()
+
 
 if __name__ == "__main__":
     model_server = Model_Server()

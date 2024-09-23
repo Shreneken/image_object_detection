@@ -1,5 +1,6 @@
 # Command line interface for image object detection
 import argparse
+
 from ml.detection_model import Detection_Model
 from ml.model_utils import Model_Handler
 
