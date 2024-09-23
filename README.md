@@ -1,3 +1,7 @@
+# Image Object Detection
+
+### Installation
+
 This project uses `pipenv` as its virtualenv management tool, which you will need to have installed:
 
 1. Install pipenv
