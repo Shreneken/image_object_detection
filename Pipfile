@@ -4,19 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-imageai = "*"
-cython = "*"
-pillow = "*"
+imageai = "~=3.0"
+cython = "~=3.0"
+pillow = "~=10.4"
 numpy = "<2"
-opencv-python = "*"
-pytest = "*"
-tqdm = "*"
-scipy = "*"
-matplotlib = "*"
-mock = "*"
-torch = "*"
-torchvision = "*"
-flask-ml = "*"
+opencv-python = "==4.10.0.84"
+pytest = "~=8.3"
+tqdm = "~=4.66"
+scipy = "~=1.14"
+matplotlib = "~=3.9"
+mock = "~=5.1"
+torch = "~=2.4"
+torchvision = "~=0.19"
+flask-ml = "0.0.9"
 
 [dev-packages]
 
