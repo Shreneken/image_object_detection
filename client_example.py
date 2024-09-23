@@ -16,7 +16,5 @@ inputs = [
 input_data_type = DataTypes.CUSTOM
 parameters = {"min_perc_prob": 30}
 
-response = client.request(
-    inputs=inputs, data_type=input_data_type, parameters={"min_perc_prob": 30}
-)
+response = client.request(inputs=inputs, data_type=input_data_type, parameters={"min_perc_prob": 30})
 print(response)

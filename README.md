@@ -8,20 +8,43 @@ This project uses `pipenv` as its virtualenv management tool, which you will nee
 ```bash
 pip install pipenv
 ```
+2. You will need to make sure you have `tkinter` installed. This can be done as the following according to your OS:
 
-Now, just run the following command to install all the dependencies
-
-2. Install dependencies
 ```bash
-pipenv install
+# Check if tkinter is installed:
+python -m tkinter
+
+# Otherwise, install it
+
+# UBUNTU / DEBIAN
+sudo apt-get install python3-tk
+
+# MacOS
+brew install python-tk@3.10
+
+# Fedora
+sudo dnf install python3-tkinter
+
+# CentOS
+sudo yum install python3-tkinter
+
+# Make sure to specify correct Python version:
+sudo apt-get install python3.10-tk
 ```
+
+Now, just run the following command to activate the env and install all the dependencies
 
 3. Activate the virtual environment
 ```bash
 pipenv shell
 ```
 
-4. Downloading the models
+4. Install dependencies
+```bash
+pipenv install
+```
+
+5. Downloading the models
 
 We want to download the models and store them inside `ml/models/`. To achieve this, you can do the following:
 ```bash
@@ -55,6 +78,7 @@ set PYTHONPATH=%PYTHONPATH%;C:\project_path
 
 ### Client example
 
+The client_example uses the `retina-net` model, so make sure you have that downloaded. Then, simply run:
 ```bash
 python client_example.py
 ```
@@ -67,7 +91,7 @@ input image uses the `--in_img` flag, output image uses the `--out_img` flag and
 
 Example usage:
 ```bash
-python cmd_interface.py --in_img ./input_images/cars.png --out_img ./output_images/new_car_2.png --model yolov3
+python cmd_interface.py --in_img ./input_images/cars.png --out_img ./output_images/sample_retina_output.png --model retina-net
 ```
 
 There are sample images present in the `input_images` directory and a `output_images` directory where you can store your results as a way to test out this project.
