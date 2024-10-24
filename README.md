@@ -78,22 +78,14 @@ or if you are using Windows:
 set PYTHONPATH=%PYTHONPATH%;C:\project_path
 ```
 
-### Client example
-
-The client_example uses the `retina-net` model, so make sure you have that downloaded. Then, simply run:
-```bash
-python client_example.py
-```
-
 ### Command line tool
 
-For the command line tool, you will need to specify the path to your input image, the path & name that you want for your output image and select one from the following models: retina-net, yolov3, tiny-yolov3.
+For the command line tool, you will need to specify the path to your input image, the path & name that you want for your output image & output csv and select one from the following models: retina-net, yolov3, tiny-yolov3.
 
-input image uses the `--in_img` flag, output image uses the `--out_img` flag and specifying the model uses the `--model` flag.
-
-Example usage:
+Simply run:
 ```bash
-python cmd_interface.py --in_img ./input_images/cars.png --out_img ./output_images/sample_retina_output.png --model retina-net
+python cmd_interface.py detech -h 
 ```
+To learn how to pass in the arguments
 
 There are sample images present in the `input_images` directory and a `output_images` directory where you can store your results as a way to test out this project.

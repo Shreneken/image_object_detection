@@ -16,34 +16,13 @@ class Detection_Model:
 
     def initialize(self):
         Model_Handler.set_model_type(self.detector_model, self.model_type)
-        self.detector_model.setModelPath(
-            os.path.join(self.exec_path, self.model_path.value)
-        )
+        self.detector_model.setModelPath(os.path.join(self.exec_path, self.model_path))
+        self.detector_model.setModelPath(os.path.join(self.exec_path, self.model_path))
         self.detector_model.loadModel()
 
-    def predict(self, input_image_path, output_image_path, min_perc_prob):
+    def predict(self, input_image_path: str, output_image_path: str, min_perc_prob: int):
         return self.detector_model.detectObjectsFromImage(
             input_image=os.path.join(self.exec_path, input_image_path),
             output_image_path=os.path.join(self.exec_path, output_image_path),
             minimum_percentage_probability=min_perc_prob,
         )
-
-
-if __name__ == "__main__":
-    det = Detection_Model(Model_Type.retina_net, Model_Path.retina_net)
-    det.initialize()
-    detections = det.predict(
-        "./input_images/cars.png", "./output_images/cars_retina.png", 30
-    )
-
-    for eachObject in detections:
-        print(
-            eachObject["name"],
-            " : ",
-            eachObject["percentage_probability"],
-            " : ",
-            eachObject["box_points"],
-        )
-        print("--------------------------------")
-
-    pprint(detections)

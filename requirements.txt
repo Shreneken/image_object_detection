@@ -1,4 +1,4 @@
-flask_ml==0.0.7
+flask_ml==0.2.2
 imageai==3.0.3
 cython
 pillow>=7.0.0

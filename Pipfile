@@ -16,7 +16,7 @@ matplotlib = "~=3.9"
 mock = "~=5.1"
 torch = "~=2.4"
 torchvision = "~=0.19"
-flask-ml = "0.0.9"
+flask-ml = "0.2.2"
 
 [dev-packages]
 
