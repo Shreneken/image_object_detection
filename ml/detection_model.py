@@ -1,9 +1,11 @@
 import os
-from pprint import pprint
+import warnings
 
 from imageai.Detection import ObjectDetection
 
 from ml.model_utils import *
+
+warnings.filterwarnings("ignore")
 
 
 class Detection_Model:

@@ -1,5 +1,7 @@
 # Image Object Detection
 
+![](screenshots/cmd_example.png)
+
 ### Installation
 
 This project uses `pipenv` as its virtualenv management tool, which you will need to have installed:
